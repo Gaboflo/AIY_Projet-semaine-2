@@ -19,3 +19,17 @@ def fichier_excel(Listcouplephotopers):
         lignerangcouple.write(1,Listcouplephotopers[rangcouple][1])
     book.save('excel_photo_personne')
     return
+
+monRepertoire="C:/Users/pc antoine/Desktop/semaine2/AIY_Projet-semaine-2/tache 1 base de données groupe de 5/Bee4 photos pics"
+from os import listdir
+from os.path import isfile, join
+
+
+
+def listeImages_noms(monRepertoire):
+    fichiers=[f for f in listdir(monRepertoire) if isfile(join(monRepertoire, f))]
+    L=[]
+    for image in fichiers:
+
+
+

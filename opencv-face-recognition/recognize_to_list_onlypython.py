@@ -1,5 +1,5 @@
 # USAGE
-# python recognize_to_list.py --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7 --recognizer output/recognizer.pickle --le output/le.pickle --image images/20181114-010344-0046-Lucas-Leclerc.jpg
+# python recognize_to_list_onlypython.py --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7 --recognizer output/recognizer.pickle --le output/le.pickle --image images/20181114-010344-0046-Lucas-Leclerc.jpg
 # import the necessary packages
 import numpy as np
 import argparse
@@ -7,6 +7,8 @@ import imutils
 import pickle
 import cv2
 import os
+
+monRepertoire1="images/20181114-010344-0046-Lucas-Leclerc.jpg"
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -26,22 +28,22 @@ args = vars(ap.parse_args())
 
 # load our serialized face detector from disk
 print("[INFO] loading face detector...")
-protoPath = os.path.sep.join([args["detector"], "deploy.prototxt"])
-modelPath = os.path.sep.join([args["detector"],
+protoPath = os.path.sep.join(["face_detection_model", "deploy.prototxt"])
+modelPath = os.path.sep.join(["face_detection_model",
 	"res10_300x300_ssd_iter_140000.caffemodel"])
 detector = cv2.dnn.readNetFromCaffe(protoPath, modelPath)
 
 # load our serialized face embedding model from disk
 print("[INFO] loading face recognizer...")
-embedder = cv2.dnn.readNetFromTorch(args["embedding_model"])
+embedder = cv2.dnn.readNetFromTorch("openface_nn4.small2.v1.t7")
 
 # load the actual face recognition model along with the label encoder
-recognizer = pickle.loads(open(args["recognizer"], "rb").read())
-le = pickle.loads(open(args["le"], "rb").read())
+recognizer = pickle.loads(open("output/recognizer.pickle", "rb").read())
+le = pickle.loads(open("output/le.pickle", "rb").read())
 
 # load the image, resize it to have a width of 600 pixels (while
 # maintaining the aspect ratio), and then grab the image dimensions
-image = cv2.imread(args["image"])
+image = cv2.imread(monRepertoire1)
 image = imutils.resize(image, width=600)
 (h, w) = image.shape[:2]
 
@@ -91,7 +93,7 @@ for i in range(0, detections.shape[2]):
 		j = np.argmax(preds)
 		proba = preds[j]
 		name = le.classes_[j]
-		l += [(args["image"],name)]
+		l += [(monRepertoire1,name)]
 
 		# draw the bounding box of the face along with the associated
 		# probability
@@ -106,4 +108,3 @@ for i in range(0, detections.shape[2]):
 
 print(l)
 cv2.waitKey(0)
-
