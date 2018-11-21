@@ -1,5 +1,5 @@
 # USAGE
-# python recognize.py --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7 --recognizer output/recognizer.pickle --le output/le.pickle --image images/20181114-010344-0046-Lucas-Leclerc.jpg
+# python recognize_to_list.py --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7 --recognizer output/recognizer.pickle --le output/le.pickle --image images/20180914-004756-9786-Arnaud-Chantepie.jpg
 
 # import the necessary packages
 import numpy as np
@@ -55,6 +55,8 @@ imageBlob = cv2.dnn.blobFromImage(
 # faces in the input image
 detector.setInput(imageBlob)
 detections = detector.forward()
+l = []
+
 
 # loop over the detections
 for i in range(0, detections.shape[2]):
@@ -90,6 +92,7 @@ for i in range(0, detections.shape[2]):
 		j = np.argmax(preds)
 		proba = preds[j]
 		name = le.classes_[j]
+		l += [(args["image"],name)]
 
 		# draw the bounding box of the face along with the associated
 		# probability
@@ -101,5 +104,5 @@ for i in range(0, detections.shape[2]):
 			cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
 
 # show the output image
-cv2.imshow("Image", image)
 cv2.waitKey(0)
+print(l)
