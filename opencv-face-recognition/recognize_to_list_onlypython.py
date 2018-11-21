@@ -78,7 +78,7 @@ def liste_image(repertoireImage):
             j = np.argmax(preds)
             proba = preds[j]
             name = le.classes_[j]
-            l += [(repertoireImage,name)]
+            l.append([repertoireImage,name])
 
             # draw the bounding box of the face along with the associated
             # probability

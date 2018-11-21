@@ -2,6 +2,13 @@
 
 from xlwt import Workbook
 
+monRepertoire="C:/Users/pc antoine/Desktop/semaine2/AIY_Projet-semaine-2/opencv-face-recognition/images"
+
+repertoireImage="images/"
+
+from os import listdir
+from os.path import isfile, join
+
 
 def fichier_excel(Listcouplephotopers):
     # création du fichier excel
@@ -99,7 +106,7 @@ def liste_image(repertoireImage):
             j = np.argmax(preds)
             proba = preds[j]
             name = le.classes_[j]
-            l += [(repertoireImage,name)]
+            l.append([repertoireImage,name])
 
             # draw the bounding box of the face along with the associated
             # probability
@@ -116,9 +123,10 @@ def liste_image(repertoireImage):
 
 
 ######################### construction de la liste entiere avec toutes les photos du dossier ci dessous
-monRepertoire="C:/Users/pc antoine/Desktop/semaine2/AIY_Projet-semaine-2/tache 1 base de données groupe de 5/Bee4 photos pics"
 
-repertoireImage="images/"
+monRepertoire="C:/Users/pc antoine/Desktop/semaine2/AIY_Projet-semaine-2/opencv-face-recognition/images"
+
+repertoireImage="images/20180914-004756-9786-Arnaud-Chantepie.jpg"
 
 from os import listdir
 from os.path import isfile, join
@@ -126,8 +134,12 @@ from os.path import isfile, join
 def listeImages_noms(monRepertoire):
     fichiers=[f for f in listdir(monRepertoire) if isfile(join(monRepertoire, f))]
     L=[]
+    i=0
     for image in fichiers:
-        L+=liste_image(repertoireImage+image)
-    return L
+        if i==0:
+            return liste_image("images/"+image)
+            L+=liste_image("images/"+image)
+        i+=1
+        return L
 
 
