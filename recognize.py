@@ -1,5 +1,5 @@
 # USAGE
-# python recognize.py --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7 --recognizer output/recognizer.pickle --le output/le.pickle --image images/20181114-010344-0046-Lucas-Leclerc.jpg
+# python recognize.py --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7 --recognizer output/recognizer.pickle --le output/le.pickle --image images/adrian.jpg
 
 # import the necessary packages
 import numpy as np
