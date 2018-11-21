@@ -10,21 +10,7 @@ import os
 
 monRepertoire1="images/20181114-010344-0046-Lucas-Leclerc.jpg"
 
-# construct the argument parser and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required=True,
-	help="path to input image")
-ap.add_argument("-d", "--detector", required=True,
-	help="path to OpenCV's deep learning face detector")
-ap.add_argument("-m", "--embedding-model", required=True,
-	help="path to OpenCV's deep learning face embedding model")
-ap.add_argument("-r", "--recognizer", required=True,
-	help="path to model trained to recognize faces")
-ap.add_argument("-l", "--le", required=True,
-	help="path to label encoder")
-ap.add_argument("-c", "--confidence", type=float, default=0.5,
-	help="minimum probability to filter weak detections")
-args = vars(ap.parse_args())
+
 
 # load our serialized face detector from disk
 print("[INFO] loading face detector...")
@@ -66,7 +52,7 @@ for i in range(0, detections.shape[2]):
 	confidence = detections[0, 0, i, 2]
 
 	# filter out weak detections
-	if confidence > args["confidence"]:
+	if confidence > 0.5:
 		# compute the (x, y)-coordinates of the bounding box for the
 		# face
 		box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
