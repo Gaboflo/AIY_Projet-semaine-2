@@ -1,13 +1,9 @@
-# USAGE
-# python recognize_to_list_onlypython.py --detector face_detection_model --embedding-model openface_nn4.small2.v1.t7 --recognizer output/recognizer.pickle --le output/le.pickle --image images/20181114-010344-0046-Lucas-Leclerc.jpg
-# import the necessary packages
 import numpy as np
 import argparse
 import imutils
 import pickle
 import cv2
 import os
-
 
 
 def liste_image(repertoireImage):
@@ -80,15 +76,7 @@ def liste_image(repertoireImage):
             name = le.classes_[j]
             l.append([repertoireImage,name])
 
-            # draw the bounding box of the face along with the associated
-            # probability
-            text = "{}: {:.2f}%".format(name, proba * 100)
-            y = startY - 10 if startY - 10 > 10 else startY + 10
-            cv2.rectangle(image, (startX, startY), (endX, endY),
-                (0, 0, 255), 2)
-            cv2.putText(image, text, (startX, y),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
-
-    # show the output image
 
     return l
+
+print(liste_image("C:/Users/pc antoine/Desktop/semaine2/AIY_Projet-semaine-2/opencv-face-recognition/images/20181114-010344-0046-Lucas-Leclerc.jpg"))

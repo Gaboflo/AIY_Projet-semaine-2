@@ -1,6 +1,4 @@
-#tâche n°3: Ecriture du code qui ressort un fichier excel avec le nom de la personne associé à un numéro de photo (c’est une table d’une base de données)
-
-"""from xlwt import Workbook
+from xlwt import Workbook
 
 monRepertoire="C:/Users/pc antoine/Desktop/semaine2/AIY_Projet-semaine-2/opencv-face-recognition/images"
 
@@ -25,9 +23,14 @@ def fichier_excel(Listcouplephotopers):
         lignerangcouple.write(0,Listcouplephotopers[rangcouple][0])
         lignerangcouple.write(1,Listcouplephotopers[rangcouple][1])
     book.save('excel_photo_personne')
-    return"""
+    return
 
-##################### copie du code recognize to list onlypython
+
+
+
+
+#########################"
+
 
 import numpy as np
 import argparse
@@ -126,6 +129,5 @@ def listeImages_noms(monRepertoire):
         L+=liste_image(monRepertoire +"/" + img)
     return L
 
-print(listeImages_noms(monRepertoire))
-
+#print(listeImages_noms(monRepertoire))
 
