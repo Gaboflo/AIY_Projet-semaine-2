@@ -14,10 +14,8 @@ def process_videos(videoPaths, dataset_path):
         namemp4 = videoPath.split(os.path.sep)[-1]
         name = namemp4[:-4]
 
-
         # Playing video from file:
         cap = cv2.VideoCapture(videoPath)
-
         try:
             if not os.path.exists(os.path.join(dataset_path, name)):
                 os.makedirs(os.path.join(dataset_path, name))
@@ -32,7 +30,6 @@ def process_videos(videoPaths, dataset_path):
             if not ret:
                 print("Done")
                 break
-
             # Saves image of the current frame in jpg file
             nam = './' + dataset_path + '/' + name + '/frame' + str(currentFrame) + '.jpg'
             print ('Creating...' + nam)
@@ -40,9 +37,6 @@ def process_videos(videoPaths, dataset_path):
 
             # To stop duplicate images
             currentFrame += 1
-            #if currentFrame > 10:
-                #break
-
         # When everything done, release the capture
         cap.release()
 
